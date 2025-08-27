@@ -9,10 +9,9 @@ defmodule Util do
       System.cmd("java",["Dialog", message])
     end
     def introduce(message, :text) do
-    message
-    |> IO.gets()
-    |> String.trim()
-   end
+      {output, _status} = System.cmd("java", ["-jar", "InputDialog.jar", "input", message])
+      String.trim(output)
+    end
 
    def enter(message, :text) do
     message
