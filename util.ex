@@ -5,21 +5,20 @@ defmodule Util do
   - fecha: 19/08/25
   - licencia GPU GPL v3
   """
-    def show_message(message) do
-      System.cmd("java",["Dialog", message])
-    end
-    def introduce(message, :text) do
-      {output, _status} = System.cmd("java", ["-jar", "InputDialog.jar", "input", message])
-      String.trim(output)
-    end
+  def show_message(message) do
+    System.cmd("java",["Dialog", message])
+  end
+  def introduce(message, :text) do
+    {output, _status} = System.cmd("java", ["-jar", "InputDialog.jar", "input", message])
+    String.trim(output)
+  end
 
-   def enter(message, :text) do
+  def enter(message, :text) do
     message
     |> IO.gets()
     |> String.trim()
-   end
-
-   def enter(message, :integer) do
+  end
+  def enter(message, :integer) do
     try do
       message
       |> enter(:text)
@@ -31,9 +30,8 @@ defmodule Util do
         message
         |> enter(:integer)
     end
-   end
-
-   def enter(message, :float) do
+  end
+  def enter(message, :float) do
     try do
       message
       |> enter(:text)
@@ -45,7 +43,14 @@ defmodule Util do
         message
         |> enter(:float)
     end
-   end
+  end
+  def enter(message, :boolean) do
+    value =
+      message
+      |>enter(:text)
+      |>String.downcase()
+    Enum.member?(["si", "sí", "s"], value)
+  end
 
   def show_error(message) do
     IO.puts(:standard_error, message)
