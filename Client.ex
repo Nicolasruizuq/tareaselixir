@@ -48,7 +48,7 @@ defmodule Client do
   def write_csv(clients, name) do
     clients
     |>generate_message_clients(&convert_client_line_csv/1)
-    |>(&("nombre, edad, altura\n"<> &1)).() # adiciona los títulos
+    |>(&("nombre, edad, altura\n"<> &1)).()
     |> (&File.write(name, &1)).()
   end
 
